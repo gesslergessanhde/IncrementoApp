@@ -10,13 +10,14 @@ import com.example.incrementoapp.model.User
 import com.example.incrementoapp.repository.AuthRepository
 
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val repository: AuthRepository) : ViewModel(){
 
-    private val _authState by mutableStateOf<AuthResult>(AuthResult.Idle)
-    val authState = StateFlow<AuthResult> = _authState
+    private val _authState = MutableStateFlow<AuthResult>(AuthResult.Idle)
+    val authState : StateFlow<AuthResult> = _authState
 
     fun login(username : String, password : String){
         _authState.value = AuthResult.Loading
